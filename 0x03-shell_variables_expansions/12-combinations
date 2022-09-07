@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "%s\n"   {a..z}{a..b}  | grep -v "oo" | sort
+echo {a..z}{a..z} | grep -oP "\b[^\s,]*\b" 
