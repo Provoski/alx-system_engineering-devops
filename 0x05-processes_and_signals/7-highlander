@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# handle SIGTERM signal
+for ((i=0; ; i++))
+do
+	echo "To infinity and beyond"
+	sleep 2
+	if ((SIGTERM))
+	then
+		echo "I am invincible!!!"
+	fi
+done
