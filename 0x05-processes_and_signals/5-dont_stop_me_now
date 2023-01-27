@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 # terminate the execution of "4-to_infinity_and_beyond" program
-pid=`ps -ef | awk '/4-to_infinity_and_beyond/{ print $2 }'`
-kill -9 $pid
+pid=`ps -ef | awk '/process_name/ { print $2 }'` | kill -9 $pid
