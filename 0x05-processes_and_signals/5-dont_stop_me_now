@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # terminate the execution of "4-to_infinity_and_beyond" program
-kill pidof 4-to_infinity_and_beyond
+kill 4-to_infinity_and_beyond
 echo 'Terminated'
