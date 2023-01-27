@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# terminate the execution of "7-highlander" program
+pkill -9 7-highlander
