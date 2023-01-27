@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#diaplay a list of current running process
+ps aux
