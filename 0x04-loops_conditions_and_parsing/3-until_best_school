@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# prints "Best School" 10x
+n=0
+until ((n == 10))
+do
+	echo "Best School"
+	((n++))
+done
