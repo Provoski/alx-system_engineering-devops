@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# display a list of current running process id with the name "bash"
+pgrep 'bash' -l
