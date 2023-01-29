@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # terminate the execution of "7-highlander" program
-kill  -9 $( pgrep -f 7-highlander)
+kill  -9 "$( pgrep -f 7-highlander)"
