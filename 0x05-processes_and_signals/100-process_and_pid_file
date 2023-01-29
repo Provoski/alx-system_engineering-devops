@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
-# Create a file and save is pid and then perform other operation
-touch /var/run/myscript.pid
-pidof /var/run/myscript.pid > /var/run/myscript.pid
-for ((i=0; ;i++))
+# handle SIGTERM signal
+trap "echo I hate the kill command" SIGTERM
+trap "echo Y U no love me?!" SIGINT
+trap "exit" SIGQUIT SIGTERM
+for ((i=0; ; i++))
 do
 	echo "To infinity and beyond"
-	if ((SIGTERM))
-	then
-		echo "I hate the kill command"
-	elif ((SIGINT))
-	then
-		echo "Y U no love me?!"
-	fi
+	sleep 2
 done
-rm -rf /var/run/myscript.pid
