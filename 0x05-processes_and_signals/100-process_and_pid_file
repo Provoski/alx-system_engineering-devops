@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
 # handle SIGTERM signal
-trap "echo I hate the kill command" SIGTERM
+handle_sigquit(){
+	rm -rf /var/run/myscript.pid
+	exit
+}
+handle_sigterm(){
+	rm -rf /var/run/myscript.pid
+	echo "I hate the kill command"
+	exit
+}
+trap "handle_sigterm" SIGTERM
 trap "echo Y U no love me?!" SIGINT
-trap "exit" SIGQUIT SIGTERM
+trap "handle_sigquit" SIGQUIT
+touch /var/run/myscript.pid
+pgrep -f 100-process_and_pid_file > /var/run/myscript.pid
 for ((i=0; ; i++))
 do
 	echo "To infinity and beyond"
