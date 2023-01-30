@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# display hoir from 0nto 12
+# display seconds from 1 to 59
+# using while loop
+
+n=0
+while ((n <= 12))
+do
+	echo "Hour: $n"
+	i=1
+	while ((i <= 59))
+	do
+		echo "$i"
+		((i++))
+	done
+	((n++))
+done

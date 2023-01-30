@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# loops 20x.
+#displays 4 and then "bad luck from China" for the 4th loop iteration
+# displays 9 and then bad luck from Japan for the 9th loop iteration
+# displays 17 and then bad luck from Italy for the 17th loop iteration
+# using while loop and case statement
+n=1
+while ((n <= 20))
+do
+	case $n in
+		4) echo "$n"
+		echo "bad luck from China";;
+		9) echo "$n"
+		echo "bad luck from Japan";;
+		17) echo "$n"
+		echo "bad luck from Italy";;
+		*) echo "$n"
+	esac
+	((n++))
+done
