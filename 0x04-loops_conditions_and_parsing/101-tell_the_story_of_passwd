@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# display the content /etc/passwd
+# printing only username, id and directory
+while IFS=":" read A B C D E F G
+do
+	echo "The user ${A} is part of the ${D} gang, lives in ${F} and rides ${G}. ${C}'s place is protected by the passcode ${B}, more info about the user here: ${E}"
+done</etc/passwd
