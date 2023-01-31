@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # display the content /etc/passwd
-# printing only username, id and director
-
-cut /etc/passwd -d ":" -f 1,3,6
+# printing only username, id and directory
+while read -r line
+do
+	echo "$line" | cut -d ":" -f 1,3,6
+done</etc/passwd
