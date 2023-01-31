@@ -3,4 +3,4 @@
 # one argument and pass it to a regular expression matching method
 # The word to match is "School"
 #
-puts ARGV[0].scan(/hbt{1,4}n/).join
+puts ARGV[0].scan(/hbt{1,1000}n/).join
