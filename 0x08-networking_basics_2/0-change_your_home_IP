@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# configures an Ubuntu server
+# localhost resolves to 127.0.0.2
+# facebook.com resolves to 8.8.8.8
+
+cp /etc/hosts ./hosts.new
+cp -f /etc/hosts ./hosts.new
+sed -i".bak" "/localhost$/d" ./hosts.new
+sed -i".bak" "/facebook.com/d" ./hosts.new
+echo -e "127.0.0.2\tlocalhost" >> ./hosts.new
+echo -e "8.8.8.8\tfacebook.com" >> ./hosts.new
+cp ./hosts.new /etc/hosts
+rm hosts.new hosts.new.bak
