@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # pings an IP address passed as an argument 5x.
 
-netstat -aon -p | awk '/LISTEN/ {print $7}'
+netstat -lp | awk '/LISTEN/{print $7}'
