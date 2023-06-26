@@ -1,9 +1,12 @@
 # configuring remote server using puppet
 
-file { '/home/vagrant/.ssh/config':
+$ssh_user = $::id::user
+$ssh_group = $::id::group
+file { 'ssh_config':
+  path    => '/etc/ssh/ssh_config',
   ensure  => file,
-  owner   => 'vagrant',
-  group   => 'vagrant',
+  owner   => $ssh_user,
+  group   => $ssh_group,
   mode    => '0600',
   content => "
     Host 34.207.57.139
