@@ -1,24 +1,11 @@
 #!/usr/bin/env bash
+# Script that configures a new Ubuntu machine to respect above requirements
 
-# installing nginx
+sudo apt-get update
+sudo apt-get install -y nginx
 
-apt-get update
+echo "Hello World!" | sudo tee /var/www/html/index.html
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.blog.provo.com permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
-apt-get install -y nginx
-
-# Configure Nginx
-cat <<EOF > /etc/nginx/sites-available/default
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html index.htm;
-
-    location /redirect_me{
-        return 301 /index.html;
-    }
-}
-EOF
-
-service nginx restart
+sudo service nginx restart
