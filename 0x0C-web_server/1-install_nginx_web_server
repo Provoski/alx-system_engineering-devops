@@ -6,6 +6,7 @@ apt-get update
 apt-get install -y nginx
 
 # Configure Nginx
+mkdir /var/www/mysite
 mkdir /var/www/mysite/html
 touch /var/www/mysite/html/index.html
 echo "Hello World!" > /var/www/mysite/html/index.html
