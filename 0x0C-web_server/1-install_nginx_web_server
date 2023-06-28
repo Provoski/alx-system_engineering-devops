@@ -8,17 +8,5 @@ apt-get install -y nginx
 # Configure Nginx
 touch /var/www/html/index.html
 echo "Hello World!" > /var/www/html/index.html
-cat <<EOF > /etc/nginx/sites-available/default
-server {
-    listen 80;
-    listen [::]:80;
-
-    root /var/www/html;
-    index index.html index.htm;
-
-    location / {
-    }
-}
-EOF
-
+sudo ufw allow 80
 service nginx restart
