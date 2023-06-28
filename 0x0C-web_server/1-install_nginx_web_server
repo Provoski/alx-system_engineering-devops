@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 # installing nginx
 
-apt-get update
+sudo apt update
 
-apt-get install -y nginx
+sudo apt install nginx -y
 
 # Configure Nginx
-touch /var/www/html/index.html
-echo "Hello World!" > /var/www/html/index.html
+sudo bash -c 'echo "
+	server {
+		listen 80 default_server;
+		listen [::]:80 default_server;
+	
+		root /var/www/html;
+		index index.html index.htm;
+	
+		location / {
+		}
+	}" > /etc/nginx/sites-available/default'
 sudo ufw allow 80
 service nginx restart
+sudo bash -c 'echo "Hello World!" > /var/www/html/index.html'
