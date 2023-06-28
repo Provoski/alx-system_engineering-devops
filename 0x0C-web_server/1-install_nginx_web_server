@@ -6,17 +6,14 @@ apt-get update
 apt-get install -y nginx
 
 # Configure Nginx
-mkdir /var/www/mysite
-mkdir /var/www/mysite/html
-touch /var/www/mysite/html/index.html
-echo "Hello World!" > /var/www/mysite/html/index.html
-chmod 644 /var/www/mysite/html/index.html
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
 cat <<EOF > /etc/nginx/sites-available/default
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root /var/www/mysite/html;
+    root /var/www/html;
     index index.html index.htm;
 
     location / {
