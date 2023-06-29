@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 # debugging server
 
-service apache2 start
-sudo apt install ufw -y
-sudo ufw allow HTTP
+sudo service apache2 start
