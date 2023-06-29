@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# debugging server
+
+service apache2 start
+sudo ufw allow HTTP
