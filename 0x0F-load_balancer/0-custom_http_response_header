@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # add a customer header with value of host name to the header file
 
-sudo sed -i '/^http {/a \    add_header X-Served-By $hostname;' /etc/nginx/nginx.conf
+if grep -q "add_header X-Served-By" /etc/nginx/nginx.conf; then
+	sudo sed -i "/add_header X-Served-By/c\	add_header X-Served-By $(hostname);" /etc/nginx/nginx.conf
+else
+	sudo sed -i "/^http {/a 	add_header X-Served-By  $(hostname);" /etc/nginx/nginx.conf
+fi
 
 sudo service nginx restart
