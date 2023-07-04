@@ -6,8 +6,14 @@ sudo apt-get install --no-install-recommends software-properties-common -y
 sudo add-apt-repository ppa:vbernat/haproxy-2.8 -y
 sudo apt-get install haproxy=2.8.\* -y
 
+# backing up configuration file
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+
 sudo update-rc.d haproxy defaults
 sudo service haproxy start
+
+# enable haproxy to be started by init script
+echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
 
 # Configuring HAproxy to 
 sed -i '$ a frontend myfrontend\n\tbind 0.0.0.0:80\n\tdefault_backend myservers\n\nbackend myservers\n\tserver webserver1 54.237.68.227:80 check\n\tserver webserver2 52.3.247.66:80 check' /etc/haproxy/haproxy.cfg
