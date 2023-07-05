@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Enabling server to listen on port 80
+
+# site-available/default has port listening at 80
+# site-enable/default has port listening at 8080
+# creating a symlink of site-enable/default from site-available/default
+# it overides the default site-enable/default configuration
+# doing this enable http to listen on port 80
+
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+#starting nginx web server
+sudo service nginx start
