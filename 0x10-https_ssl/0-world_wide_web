@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# display information aboit subdomain
+# shellcheck disable=SC2086
+
+# a function that gives information abiut domain and subdomain
+domain_info() {
+	# of only the main domain name is passed
+	if [[ -n $1 ]] & [[ -z $2 ]];  then
+		www="www"".""$1"
+		lb="lb-01"".""$1"
+		web1="web-01"".""$1"
+		web2="web-02"".""$1"
+
+		# subdomain list
+		subdomains_list=("www" "lb-01" "web1-01" "web2-02")
+
+		# storing recors type for each subdomain
+		www_record_type=$(dig "$www" | grep -A1 'ANSWER SECTION:' |  awk '{ print $4 }')
+		lb_record_type=$(dig "$lb" | grep -A1 'ANSWER SECTION:' |  awk '{ print $4 }')
+		web1_record_type=$(dig "$web1" | grep -A1 'ANSWER SECTION:' |  awk '{ print $4 }')
+		web2_record_type=$(dig "$web2" | grep -A1 'ANSWER SECTION:' |  awk '{ print $4 }')
+
+		# list of subdomain_type
+		subdomains_type=("$www_record_type" "$lb_record_type" "$web1_record_type" "$web2_record_type")
+
+		# stroring sub domain ip
+		www_subdomain_ip=$(dig +short "$www")
+		lb_subdomain_ip=$(dig +short "$lb")
+		web1_subdomain_ip=$(dig +short "$web1")
+		web2_subdomain_ip=$(dig +short "$web2")
+
+		# list of subdomain ip
+		subdomains_ip=("$www_subdomain_ip" "$lb_subdomain_ip" "$web1_subdomain_ip" "$web2_subdomain_ip")
+		length=${#subdomains_ip[@]}
+		i=0
+		while [ $i -lt $length ]
+		do
+			echo "The subdomain ${subdomains_list[i]} is a ${subdomains_type[$i]} record and points to ${subdomains_ip[$i]}"
+			((i++))
+		done
+		exit 0
+
+	# main domain and subdomain names are passed
+	else	
+		domain="$1"
+		subdomain="$2"
+		full_domain="$subdomain"."$domain"
+	
+		subdomain_type=$(dig "$full_domain" | grep -A1 'ANSWER SECTION:' |  awk '{ print $4 }')	
+		subdomain_ip=$(dig +short "$full_domain")
+		echo "The subdomain $subdomain is a $subdomain_type record and points to $subdomain_ip"
+		exit 0
+	fi	
+}
+domain_info $1 $2
