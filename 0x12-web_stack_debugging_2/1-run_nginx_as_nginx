@@ -7,8 +7,8 @@ sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.ba
 sudo service nginx stop
 
 # Replace "user root;" with "user nginx;" in the Nginx configuration file
-sed -i '3i\# running nginx under nginx user' /etc/nginx/nginx.conf
-sed -i '4i\user nginx;' /etc/nginx/nginx.conf
+sed -i '1i\# running nginx under nginx user' /etc/nginx/nginx.conf
+sed -i '2i\user nginx;' /etc/nginx/nginx.conf
 
 # Start Nginx to run as the nginx user
 sudo service nginx start
