@@ -10,5 +10,6 @@ sudo service nginx stop
 sed -i '1i\# running nginx under nginx user' /etc/nginx/nginx.conf
 sed -i '2i\user nginx;' /etc/nginx/nginx.conf
 
+sudo nginx -g 'daemon on; master_process on;'
 # Start Nginx to run as the nginx user
 sudo service nginx start
