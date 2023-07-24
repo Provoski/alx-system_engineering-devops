@@ -28,23 +28,19 @@ def gather_data_from_api(userId):
     employee_id = employee_data.get("id")
     employee_name = employee_data.get("name")
     """opening the csv file to write to"""
-    with open(csv_file, 'w', newline='') as f:
+    with open(csv_file, mode='w', newline='') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_ALL)
         for todo in todo_data:
-            if todo["completed"]:
-                completed = "True"
-            else:
-                completed = "False"
             """writing to csv file"""
             writer.writerow([
                                 employee_id,
                                 employee_name,
-                                completed,
+                                todo["completed"],
                                 todo["title"]
                                 ])
 
 
 if __name__ == "__main__":
     """program entry point"""
-    userid = sys.argv[1]
+    userid = int(sys.argv[1])
     gather_data_from_api(userid)
