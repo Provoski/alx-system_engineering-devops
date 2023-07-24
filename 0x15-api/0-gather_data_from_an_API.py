@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """0-gather_data_from_an_API module"""
-import sys
 import requests
+import sys
 
 
 def gather_data_from_api(userId):
@@ -24,13 +24,14 @@ def gather_data_from_api(userId):
     employee_response = requests.get(employee_url)
     """converting employee_response to json format"""
     employee_data = employee_response.json()
+    employee_name = employee_data.get("name")
     """counting my total task and completed task"""
     for todo in todo_data:
         total_tasks = total_tasks + 1
         if todo["completed"]:
             completed_tasks = completed_tasks + 1
     print("Employee {} is done with tasks({}/{}):".format(
-            employee_data["name"],
+            employee_name,
             completed_tasks,
             total_tasks
             ))
