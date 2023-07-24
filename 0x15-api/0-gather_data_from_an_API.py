@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """0-gather_data_from_an_API module"""
-import json
-import request
+import sys
+import requests
 
 
 def gather_data_from_api(userId):
@@ -41,7 +41,5 @@ def gather_data_from_api(userId):
 
 if __name__ == "__main__":
     """program entry point"""
-    import sys
-
     userid = sys.argv[1]
     gather_data_from_api(userid)
