@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """0-gather_data_from_an_API module"""
-import csv
+import json
 import requests
 import sys
 
 
-def export_to_csv(userId):
+def export_to_json(userId):
     """declearing my tasks counter variables"""
-    csv_file = "{}.csv".format(userid)
+    new_json_dict = {}
+    json_file = "{}.json".format(userId)
     """api url"""
     api_link = "https://jsonplaceholder.typicode.com/"
     """todo url"""
@@ -24,23 +25,22 @@ def export_to_csv(userId):
     employee_response = requests.get(employee_url)
     """converting employee_response to json format"""
     employee_data = employee_response.json()
-    """storing employee neeeded data"""
     employee_id = employee_data.get("id")
-    employee_name = employee_data.get("name")
-    """opening the csv file to write to"""
-    with open(csv_file, mode='w', newline='') as f:
-        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
-        for todo in todo_data:
-            """writing to csv file"""
-            writer.writerow([
-                                str(employee_id),
-                                employee_name,
-                                todo["completed"],
-                                todo["title"]
-                                ])
+    employee_username = employee_data.get("username")
+
+    new_json_dict[str(employee_id)] = []
+    for todo in todo_data:
+        task_info = {
+                "task": todo['title'],
+                "completed": todo['completed'],
+                "username": employee_username
+            }
+        new_json_dict[str(employee_id)].append(task_info)
+    with open(json_file, 'w') as f:
+        json.dump(new_json_dict, f)
 
 
 if __name__ == "__main__":
     """program entry point"""
-    userid = int(sys.argv[1])
-    export_to_csv(userid)
+    userid = sys.argv[1]
+    export_to_json(userid)
