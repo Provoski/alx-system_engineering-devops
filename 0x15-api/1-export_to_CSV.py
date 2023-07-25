@@ -26,7 +26,7 @@ def export_to_csv(userId):
     employee_data = employee_response.json()
     """storing employee neeeded data"""
     employee_id = employee_data.get("id")
-    employee_name = employee_data.get("name")
+    employee_username = employee_data.get("username")
     """opening the csv file to write to"""
     with open(csv_file, mode='w', newline='') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_ALL)
@@ -34,7 +34,7 @@ def export_to_csv(userId):
             """writing to csv file"""
             writer.writerow([
                                 str(employee_id),
-                                employee_name,
+                                employee_username,
                                 todo["completed"],
                                 todo["title"]
                                 ])
