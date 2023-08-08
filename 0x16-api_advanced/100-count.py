@@ -6,7 +6,7 @@ import requests
 
 def count_words(subreddit, word_list, after=None):
     """
-    coubt how many tumes a word appears in a hot posts title
+    count how many tumes a word appears in a hot posts title
     """
     user_agent = "100-count_words"
     counts = {}
@@ -23,19 +23,19 @@ def count_words(subreddit, word_list, after=None):
                                 allow_redirects=False
                                 )
         if response.status_code == 200:
-            data = response.json()
-            if "data" in data and "children" in data["data"]:
-                posts = data["data"]["children"]
+            dt = response.json()
+            if "data" in dt and "children" in dt["data"]:
+                posts = dt["data"]["children"]
                 for post in posts:
                     title = post["data"]["title"].lower()
                     for word in word_list:
                         if re.search(rf'\b{word}\b', title):
                             counts[word] += 1
-                if "after" in data["data"] and data["data"]["after"]:
+                if "after" in dt["data"] and dt["data"]["after"] is not None:
                     count_words(
                                     subreddit,
                                     word_list,
-                                    data["data"]["after"]
+                                    dt["data"]["after"]
                                     )
                 else:
                     for word, count in counts.items():
