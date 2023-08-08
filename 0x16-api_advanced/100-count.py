@@ -10,12 +10,11 @@ def count_words(subreddit, word_list, after=None):
     """
     user_agent = "100-count_words"
     counts = {}
-    print(counts)
-    sorted__word_list = sorted(word_list)
     url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}"
     full_url = url.format(subreddit, after)
     headers = {"User-Agent": user_agent}
-    for word in sorted_word_list:
+    word_list.sort()
+    for word in word_list:
         counts[word] = 0
     try:
         response = requests.get(
@@ -29,17 +28,17 @@ def count_words(subreddit, word_list, after=None):
                 posts = data["data"]["children"]
                 for post in posts:
                     title = post["data"]["title"].lower()
-                    for word in sorted_word_list:
-                        if re.search(r'\b' + word + r'\b', title):
+                    for word in word_list:
+                        if re.search(rf'\b{word}\b', title):
                             counts[word] += 1
                 if "after" in data["data"] and data["data"]["after"]:
-                    return count_words(
-                                        subreddit,
-                                        word_list,
-                                        data["data"]["after"]
-                                        )
+                    count_words(
+                                    subreddit,
+                                    word_list,
+                                    data["data"]["after"]
+                                    )
                 else:
-                    for word, count in counts.items:
+                    for word, count in counts.items():
                         if count > 0:
                             print("{}: {}".format(word, count))
             else:

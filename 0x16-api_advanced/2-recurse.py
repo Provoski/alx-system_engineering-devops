@@ -30,8 +30,7 @@ def recurse(subreddit, hot_list=[], after=None):
                     hot_list.append(post["data"]["title"])
                 if "after" in data["data"] and data["data"]["after"] is not None:
                     recurse(subreddit, hot_list, data["data"]["after"])
-                else:
-                    return hot_list
+                return hot_list
             else:
                 return None
         else:
