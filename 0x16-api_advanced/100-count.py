@@ -5,6 +5,9 @@ import requests
 
 
 def count_words(subreddit, word_list, after=None):
+    """
+    coubt how many tumes a word appears in a hot posts title
+    """
     user_agent = "100-count_words"
     counts = {}
     print(counts)
